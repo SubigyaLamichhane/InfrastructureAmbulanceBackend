@@ -7,10 +7,6 @@ import { __prod__ } from './constants';
 export const dataSource = new DataSource({
   url: process.env.DATABASE_URL,
   type: 'postgres',
-  // host: 'localhost',
-  // database: 'lireddit3',
-  // username: 'liredit3',
-  // password: 'postgres',
   logging: false,
   synchronize: true,
   entities: [Complain, User],
