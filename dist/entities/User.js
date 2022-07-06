@@ -8,11 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
-const Post_1 = require("./Post");
+const Complain_1 = require("./Complain");
+const graphql_type_long_1 = __importDefault(require("graphql-type-long"));
 let User = class User extends typeorm_1.BaseEntity {
     constructor() {
         super(...arguments);
@@ -50,18 +54,34 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Post_1.Post, (post) => post.creator),
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
+    (0, typeorm_1.Column)({ type: 'int' }),
+    __metadata("design:type", Number)
+], User.prototype, "wardNo", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => String),
+    (0, typeorm_1.Column)({ type: 'text' }),
+    __metadata("design:type", String)
+], User.prototype, "firstname", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => String),
+    (0, typeorm_1.Column)({ type: 'text' }),
+    __metadata("design:type", String)
+], User.prototype, "lastname", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => graphql_type_long_1.default),
+    (0, typeorm_1.Column)({ type: 'bigint' }),
+    __metadata("design:type", Number)
+], User.prototype, "phonenumber", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Complain_1.Complain, (complain) => complain.creator),
     __metadata("design:type", Array)
-], User.prototype, "posts", void 0);
+], User.prototype, "complaints", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => Boolean),
-    (0, typeorm_1.Column)({ type: 'boolean', nullable: true }),
+    (0, typeorm_1.Column)({ type: 'boolean' }),
     __metadata("design:type", Boolean)
 ], User.prototype, "isAdmin", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Post_1.Post, (post) => post.creator),
-    __metadata("design:type", Array)
-], User.prototype, "approvedposts", void 0);
 User = __decorate([
     (0, type_graphql_1.ObjectType)(),
     (0, typeorm_1.Entity)()

@@ -15,18 +15,17 @@ const ioredis_1 = __importDefault(require("ioredis"));
 const type_graphql_1 = require("type-graphql");
 const constants_1 = require("./constants");
 const dataSource_1 = require("./dataSource");
-const approvedPosts_1 = require("./resolvers/approvedPosts");
-const posts_1 = require("./resolvers/posts");
+const complain_1 = require("./resolvers/complain");
 const user_1 = require("./resolvers/user");
 const main = async () => {
     await dataSource_1.dataSource.initialize();
     const app = (0, express_1.default)();
     let RedisStore = (0, connect_redis_1.default)(express_session_1.default);
     let redis = new ioredis_1.default({
-        host: 'redis-12967.c244.us-east-1-2.ec2.cloud.redislabs.com',
+        host: process.env.REDIS_URL,
         port: 12967,
         username: 'default',
-        password: '8BtwGIgWBN1LbhnpEqWT0Q139sOZOp2L',
+        password: process.env.REDIS_PASSWORD,
     });
     app.set('trust proxy', 1);
     app.use((0, cors_1.default)({
@@ -51,7 +50,7 @@ const main = async () => {
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: await (0, type_graphql_1.buildSchema)({
-            resolvers: [posts_1.PostResolver, user_1.UserResolver, approvedPosts_1.ApprovedPostResolver],
+            resolvers: [complain_1.ComplainResolver, user_1.UserResolver],
             validate: false,
         }),
         plugins: [(0, apollo_server_core_1.ApolloServerPluginLandingPageGraphQLPlayground)()],

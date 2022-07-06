@@ -8,7 +8,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Post } from './Post';
+import { Complain } from './Complain';
+//@ts-ignore
+import Long from 'graphql-type-long';
 
 @ObjectType()
 @Entity()
@@ -36,13 +38,26 @@ export class User extends BaseEntity {
   @Column({ type: 'text', unique: true })
   email!: string;
 
-  @OneToMany(() => Post, (post) => post.creator)
-  posts: Post[];
+  @Field(() => Int)
+  @Column({ type: 'int' })
+  wardNo!: number;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  firstname!: string;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  lastname!: string;
+
+  @Field(() => Long)
+  @Column({ type: 'bigint' })
+  phonenumber!: number;
+
+  @OneToMany(() => Complain, (complain) => complain.creator)
+  complaints: Complain[];
 
   @Field(() => Boolean)
-  @Column({ type: 'boolean', nullable: true })
+  @Column({ type: 'boolean' })
   isAdmin: Boolean;
-
-  @OneToMany(() => Post, (post) => post.creator)
-  approvedposts: Post[];
 }

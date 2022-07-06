@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from 'type-graphql';
+import { Field, Float, Int, ObjectType } from 'type-graphql';
 import {
   BaseEntity,
   Column,
@@ -12,7 +12,7 @@ import { User } from './User';
 
 @ObjectType()
 @Entity()
-export class Post extends BaseEntity {
+export class Complain extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id!: number;
@@ -31,13 +31,33 @@ export class Post extends BaseEntity {
 
   @Field()
   @Column()
-  text!: string;
+  description!: string;
+
+  @Field(() => String)
+  @Column({ type: 'text' })
+  category!: string;
+
+  @Field(() => Int)
+  @Column({ type: 'int' })
+  wardNo: number;
+
+  @Field(() => Float)
+  @Column({ type: 'float' })
+  latitude: number;
+
+  @Field(() => Float)
+  @Column({ type: 'float' })
+  longitude: number;
 
   @Field()
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.complaints)
   creator: User;
 
   @Field()
   @Column()
   creatorId!: number;
+
+  @Field()
+  @Column()
+  imagePublicId: string;
 }

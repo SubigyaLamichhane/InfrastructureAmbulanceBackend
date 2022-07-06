@@ -9,11 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Post = void 0;
+exports.Complain = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const User_1 = require("./User");
-let Post = class Post extends typeorm_1.BaseEntity {
+let Complain = class Complain extends typeorm_1.BaseEntity {
     constructor() {
         super(...arguments);
         this.createdAt = new Date();
@@ -24,40 +24,65 @@ __decorate([
     (0, type_graphql_1.Field)(() => type_graphql_1.Int),
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Post.prototype, "id", void 0);
+], Complain.prototype, "id", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Object)
-], Post.prototype, "createdAt", void 0);
+], Complain.prototype, "createdAt", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Object)
-], Post.prototype, "updatedAt", void 0);
+], Complain.prototype, "updatedAt", void 0);
 __decorate([
     (0, type_graphql_1.Field)(() => String),
     (0, typeorm_1.Column)({ type: 'text' }),
     __metadata("design:type", String)
-], Post.prototype, "title", void 0);
+], Complain.prototype, "title", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Post.prototype, "text", void 0);
+], Complain.prototype, "description", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => String),
+    (0, typeorm_1.Column)({ type: 'text' }),
+    __metadata("design:type", String)
+], Complain.prototype, "category", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Int),
+    (0, typeorm_1.Column)({ type: 'int' }),
+    __metadata("design:type", Number)
+], Complain.prototype, "wardNo", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Float),
+    (0, typeorm_1.Column)({ type: 'float' }),
+    __metadata("design:type", Number)
+], Complain.prototype, "latitude", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(() => type_graphql_1.Float),
+    (0, typeorm_1.Column)({ type: 'float' }),
+    __metadata("design:type", Number)
+], Complain.prototype, "longitude", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
-    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.posts),
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.complaints),
     __metadata("design:type", User_1.User)
-], Post.prototype, "creator", void 0);
+], Complain.prototype, "creator", void 0);
 __decorate([
     (0, type_graphql_1.Field)(),
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Post.prototype, "creatorId", void 0);
-Post = __decorate([
+], Complain.prototype, "creatorId", void 0);
+__decorate([
+    (0, type_graphql_1.Field)(),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Complain.prototype, "imagePublicId", void 0);
+Complain = __decorate([
     (0, type_graphql_1.ObjectType)(),
     (0, typeorm_1.Entity)()
-], Post);
-exports.Post = Post;
-//# sourceMappingURL=Post.js.map
+], Complain);
+exports.Complain = Complain;
+//# sourceMappingURL=Complain.js.map

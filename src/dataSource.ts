@@ -1,8 +1,7 @@
 import { DataSource } from 'typeorm';
-import { Post } from './entities/Post';
+import { Complain } from './entities/Complain';
 import { User } from './entities/User';
 import path from 'path';
-import { ApprovedPost } from './entities/ApprovedPosts';
 import { __prod__ } from './constants';
 
 export const dataSource = new DataSource({
@@ -14,7 +13,7 @@ export const dataSource = new DataSource({
   // password: 'postgres',
   logging: false,
   synchronize: true,
-  entities: [Post, User, ApprovedPost],
+  entities: [Complain, User],
   migrations: [path.join(__dirname, './migrations/*')],
   ssl: {
     rejectUnauthorized: false,

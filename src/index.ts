@@ -11,8 +11,7 @@ import Redis from 'ioredis';
 import { buildSchema } from 'type-graphql';
 import { COOKIE_NAME, __prod__ } from './constants';
 import { dataSource } from './dataSource';
-import { ApprovedPostResolver } from './resolvers/approvedPosts';
-import { PostResolver } from './resolvers/posts';
+import { ComplainResolver } from './resolvers/complain';
 import { UserResolver } from './resolvers/user';
 //import argon2 from 'argon2';
 
@@ -35,10 +34,10 @@ const main = async () => {
 
   let RedisStore = connectRedis(session);
   let redis = new Redis({
-    host: 'redis-12967.c244.us-east-1-2.ec2.cloud.redislabs.com',
+    host: process.env.REDIS_URL,
     port: 12967,
     username: 'default',
-    password: '8BtwGIgWBN1LbhnpEqWT0Q139sOZOp2L',
+    password: process.env.REDIS_PASSWORD,
   });
 
   //applies cors is all routes
@@ -71,7 +70,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PostResolver, UserResolver, ApprovedPostResolver],
+      resolvers: [ComplainResolver, UserResolver],
       validate: false,
     }),
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
@@ -94,13 +93,6 @@ const main = async () => {
   app.listen(PORT, () => {
     console.log(`Server started at port ${PORT}`);
   });
-  // const post = orm.em.create(Post, {
-  //   title: 'my first post',
-  // } as RequiredEntityData<Post>);
-  // await orm.em.persistAndFlush(post);
 };
 
 main();
-
-// 8.A5MY.Z7tZhLpX
-// S4sj3fshp1h6nkdin6qclz6ta3iwf180gvg88my3on0rhjr1aon
