@@ -22,10 +22,8 @@ const main = async () => {
     const app = (0, express_1.default)();
     let RedisStore = (0, connect_redis_1.default)(express_session_1.default);
     let redis = new ioredis_1.default({
-        host: process.env.REDIS_URL,
-        port: 12967,
-        username: 'default',
-        password: process.env.REDIS_PASSWORD,
+        host: '127.0.0.1',
+        port: 6379,
     });
     app.set('trust proxy', 1);
     app.use((0, cors_1.default)({

@@ -7,6 +7,7 @@ import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import Redis from 'ioredis';
+//import { createClient } from 'redis';
 
 import { buildSchema } from 'type-graphql';
 import { COOKIE_NAME, __prod__ } from './constants';
@@ -17,6 +18,7 @@ import { UserResolver } from './resolvers/user';
 
 const main = async () => {
   await dataSource.initialize();
+
   //await dataSource.runMigrations();
 
   //await Post.delete({});
@@ -34,11 +36,17 @@ const main = async () => {
 
   let RedisStore = connectRedis(session);
   let redis = new Redis({
-    host: process.env.REDIS_URL,
-    port: 12967,
-    username: 'default',
-    password: process.env.REDIS_PASSWORD,
+    // host: process.env.REDIS_URL,
+    // port: 12967,
+    host: '127.0.0.1',
+    port: 6379,
+    //username: 'default',
+    //password: process.env.REDIS_PASSWORD,
   });
+
+  // let redis = createClient({
+  //   url: 'http://127.0.0.1:6379',
+  // });
 
   //applies cors is all routes
   app.set('trust proxy', 1);
