@@ -36,12 +36,12 @@ const main = async () => {
 
   let RedisStore = connectRedis(session);
   let redis = new Redis({
-    host: process.env.REDIS_URL,
+    // host: process.env.REDIS_URL,
 
-    // host: '127.0.0.1',
-    // port: 6379,
-    //username: 'default',
-    //password: process.env.REDIS_PASSWORD,
+    host: 'containers-us-west-106.railway.app',
+    port: 5945,
+    username: 'default',
+    password: 'XKMyYznoeun870EecFYz',
   });
 
   // let redis = createClient({

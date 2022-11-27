@@ -22,7 +22,10 @@ const main = async () => {
     const app = (0, express_1.default)();
     let RedisStore = (0, connect_redis_1.default)(express_session_1.default);
     let redis = new ioredis_1.default({
-        host: process.env.REDIS_URL,
+        host: 'containers-us-west-106.railway.app',
+        port: 5945,
+        username: 'default',
+        password: 'XKMyYznoeun870EecFYz',
     });
     app.set('trust proxy', 1);
     app.use((0, cors_1.default)({
