@@ -36,10 +36,10 @@ const main = async () => {
 
   let RedisStore = connectRedis(session);
   let redis = new Redis({
-    // host: process.env.REDIS_URL,
-    // port: 12967,
-    host: '127.0.0.1',
-    port: 6379,
+    host: process.env.REDIS_URL,
+
+    // host: '127.0.0.1',
+    // port: 6379,
     //username: 'default',
     //password: process.env.REDIS_PASSWORD,
   });
@@ -71,7 +71,7 @@ const main = async () => {
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
       },
       saveUninitialized: false,
-      secret: 'avneoanveoanveanveoanevoa',
+      secret: process.env.SESSION_SECRET as string,
       resave: false,
     })
   );
