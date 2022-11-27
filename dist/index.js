@@ -22,8 +22,7 @@ const main = async () => {
     const app = (0, express_1.default)();
     let RedisStore = (0, connect_redis_1.default)(express_session_1.default);
     let redis = new ioredis_1.default({
-        host: '127.0.0.1',
-        port: 6379,
+        host: process.env.REDIS_URL,
     });
     app.set('trust proxy', 1);
     app.use((0, cors_1.default)({
@@ -43,7 +42,7 @@ const main = async () => {
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         },
         saveUninitialized: false,
-        secret: 'avneoanveoanveanveoanevoa',
+        secret: process.env.SESSION_SECRET,
         resave: false,
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
